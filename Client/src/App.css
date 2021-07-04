@@ -1,0 +1,113 @@
+
+  .bloc-tabs {
+    display: flex;
+   justify-content: center;
+  }
+  .tabs {
+    padding: 10px;
+    text-align: center;
+    min-width: min-content;
+    width: 10%;
+    background: rgba(26, 51, 211, 0.456);
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+    font-size: large;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  .tabs:not(:last-child){
+    border-right: 1px solid rgba(0, 0, 0, 0.274);
+  }
+  
+  .active-tabs  {
+      
+    background: rgb(231, 152, 33);
+    border-bottom: 1px solid transparent;
+  }
+  
+  .active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: rgb(24, 54, 206);
+  }
+  
+  
+  
+
+  .content-tabs {
+    flex-grow : 1;
+  }
+  .tabs_content {
+   text-align: center;
+    background: white;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .tabs_content h2 {
+    padding: 0px 0 5px 0px;
+  }
+  .tabs_content hr {
+    width: 100px;
+    height: 2px;
+    background: #222;
+    margin-bottom: 5px;
+  }
+  .tabs_content p {
+    width: 100%;
+    height: 100%;
+  }
+  .active-content {
+    display: block;
+  }
+  
+
+#nav-collapse li NavLink:hover { 
+    color: blue; 
+}
+#nav-collapse NavLink:hover {
+
+    background-color: gray; 
+}
+
+#nav-collapse  li.active { 
+   color:green;
+    background-color: yellow; 
+}
+#nav-collapse  li.active NavLink {
+    color: red;
+}
+
+.backgroundColor{
+  background-color: #0a183d;
+}
+
+
+
+
+
+#journal-scroll::-webkit-scrollbar {
+  width: 4px;
+  cursor: pointer;
+  /*background-color: rgba(229, 231, 235, var(--bg-opacity));*/
+
+}
+#journal-scroll::-webkit-scrollbar-track {
+  background-color: rgba(229, 231, 235, var(--bg-opacity));
+  cursor: pointer;
+  /*background: red;*/
+}
+#journal-scroll::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background-color: #a0aec0;
+  /*outline: 1px solid slategrey;*/
+}

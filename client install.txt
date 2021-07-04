@@ -1,0 +1,11 @@
+npm install react-router-dom
+npm i swiper
+npm install redux
+npm install react-redux
+npm install redux-thunk
+npm i axios
+
+npm i redux-devtools-extension
+
+npm i react-transition-group
+

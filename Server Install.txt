@@ -1,0 +1,14 @@
+server:
+npm init
+npm install mongodb
+npm install express
+npm install body-parser
+npm install cors
+npm install nodemon
+npm install dotenv
+npm install express-fileupload
+
+
+https://github.com/uilibrary/matx-react
+
+https://tailwindcomponents.com/component/table-4
