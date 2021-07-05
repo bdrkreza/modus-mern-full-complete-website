@@ -7,7 +7,9 @@ import Header from '../../Components/Header/Header/Header/Header';
 import Navbar from '../../Components/Header/Navbar/Navbar';
 import FeatureProducts from '../../Components/Product/FeatureProduct/FeatureProduct';
 import Product from '../../Components/Product/Product/Product';
+import SingleProductView from '../../Components/Product/SingleProductView/SingleProductView';
 import Testimonial from '../../Components/Testimonial/Testimonial/Testimonial';
+
 
 const Home = () => {
     return (
@@ -15,6 +17,7 @@ const Home = () => {
             <Navbar />
             <Header />
             <Product />
+
             <Banner />
             <FeatureProducts />
             <BlogSection />

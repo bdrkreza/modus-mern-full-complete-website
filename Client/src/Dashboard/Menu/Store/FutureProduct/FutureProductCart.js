@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import EditCart from '../EditProduct/EditCart'
+import ProductView from '../ProductView/ProductView'
 import DeleteConfirmButton from '../DeleteConfirmButton/DeleteConfirmButton';
 const FutureProductCart = ({ data }) => {
 
+    const [EditModal, setEditModal] = useState(false);
+    const [viewModal, setViewModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const { name, image, _id, email } = data;
+    const { name, image, _id, } = data;
 
     return (
         <>
@@ -27,18 +30,33 @@ const FutureProductCart = ({ data }) => {
                 <td>
                     <div class="flex item-center justify-center">
                         {/* View Button */}
-                        <div class="w-5 mr-3 transform  hover:text-purple-500 hover:scale-110 cursor-pointer">
+
+                        {/* View Button */}
+                        <button onClick={() => setViewModal(true)} class="w-6 mr-3 transform  hover:text-purple-500 hover:scale-110 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
-                        </div>
-                        {/* edit button */}
-                        <Link to={`/editProduct/${_id}`} class="w-5 mr-3 text-blue-800 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </button>
+
+                        {
+                            viewModal ? <ProductView product={data} setViewModal={setViewModal} /> : null
+                        }
+
+                        {/* Edit Button */}
+
+                        <button onClick={() => setEditModal(true)} class="w-6 mr-3 text-blue-800 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
                             </svg>
-                        </Link>
+                        </button>
+
+                        {
+                            EditModal ? <EditCart _id={_id} viewData={data} setEditModal={setEditModal} /> : null
+                        }
+
+
                         {/* Delete Button */}
                         <button onClick={() => setShowModal(true)} class="w-6  transform text-red-800 hover:text-purple-500 hover:scale-110 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

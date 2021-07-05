@@ -1,13 +1,17 @@
 import React from 'react';
-import { faSearch, faHeart, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faHeart, faStar, faEye, faEyeDropper, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../Redux/Action/Action';
+import { useState } from 'react';
+import SingleProductView from '../SingleProductView/SingleProductView';
+
 
 
 const NewArrivalProduct = ({ product }) => {
-    const { price, name, image, id } = product;
+    const { price, name, image, _id } = product;
+    const [singleProductView, setProductView] = useState(false)
     console.log(product);
     const dispatch = useDispatch();
     return (
@@ -16,13 +20,22 @@ const NewArrivalProduct = ({ product }) => {
                 <div class="relative flex justify-center">
                     <img src={image} class="h-72 w-auto items-center" alt="product_img" />
                     <div
-                        class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <Link to={`/productView/${id}`}
+                        class="absolute  bg-black bg-opacity-40 right-0 items-center justify-center flex-col  gap-2 opacity-0 group-hover:opacity-100 transition  ease-in duration-700  transition">
+                        <div
                             class="text-white text-lg w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition">
-                            <FontAwesomeIcon size="2x" icon={faSearch} />
-                        </Link>
+                            <button onClick={() => setProductView(true)}>
+                                <svg className="h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                        </div>
+                        {
+                            singleProductView ? <SingleProductView id={_id} data={product} setProductView={setProductView} /> : null
+                        }
+
                         <a href="/"
-                            class="text-white text-lg w-12 h-12 rounded-full ml-3 bg-primary flex items-center justify-center hover:bg-gray-800 transition">
+                            class="text-white text-lg w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition">
                             <i class="far fa-heart"></i>
                             <FontAwesomeIcon size="2x" icon={faHeart} />
                         </a>

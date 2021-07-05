@@ -1,35 +1,33 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import img from '../../assets/images/collection/arrivals1.png'
-import img1 from '../../assets/images/collection/arrivals2.png'
+import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import img from '../../../assets/images/populer-products/fff.png'
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { addToCart } from '../../../Redux/Action/Action';
 
-const ProductView = () => {
-
-    const { Id } = useParams();
+const SingleProductView = ({ setProductView, data }) => {
+    const { price, name, image, size, describe } = data;
     const dispatch = useDispatch();
-    const product = useSelector(state => state.product.productData);
-    console.log(product)
 
-    useEffect(() => {
-        dispatch({ type: 'PRODUCT', Id })
-    }, [Id])
     return (
-        <div>
-            <section class="text-blueGray-700 ">
-                <div class="container items-center px-5 py-8 mx-auto">
-                    <div class="flex flex-wrap mb-12 text-left">
+        <div className="min-w-screen h-screen animated  fixed  flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-center bg-cover overflow-auto px-44">
+
+            <div class="absolute h-screen bg-gray-800 opacity-60 inset-0 z-0 "></div>
+            <section class="backgroundColor rounded shadow-lg border flex flex-col py-10 relative overflow-auto pt-10">
+                <div class="bg-white shadow rounded overflow-hidden group z-50">
+
+                    <div class="flex flex-wrap mb-12 relative">
+                        <FontAwesomeIcon onClick={() => setProductView(false)} className="text-red-400 mt-4 absolute top-0 mr-4 right-0 cursor-pointer text-2xl" icon={faTimes} />
                         <div class="w-full mx-auto lg:w-1/3">
                             <div class="p-6">
                                 <div >
-                                    <img className="h-52" src={img1} class="w-full" />
+                                    <img className="h-52" src={image} class="w-full" alt="img" />
                                     <div class="grid grid-cols-5 gap-4 mt-4">
-                                        <img src={img} class="w-full cursor-pointer border border-primary" />
-                                        <img src="images/products/product1.jpg" class="w-full cursor-pointer border" />
-                                        <img src="images/products/product8.jpg" class="w-full cursor-pointer border" />
-                                        <img src="images/products/product12.jpg" class="w-full cursor-pointer border" />
-                                        <img src="images/products/product11.jpg" class="w-full cursor-pointer border" />
+                                        <img src={image} class="w-full cursor-pointer border border-primary" alt="igm" />
+                                        <img src={img} class="w-full cursor-pointer border" alt="img" />
+                                        <img src={img} class="w-full cursor-pointer border" alt="img" />
+                                        <img src={img} class="w-full cursor-pointer border" alt="img" />
+                                        <img src={img} class="w-full cursor-pointer border" alt='img' />
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +37,7 @@ const ProductView = () => {
                             <div class="p-6">
                                 <div class="lg:w-2/3 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                                     <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
-                                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">The Catcher in the Rye</h1>
+                                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{name}</h1>
                                     <div class="flex mb-4">
                                         <span class="flex items-center">
                                             <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
@@ -77,7 +75,7 @@ const ProductView = () => {
                                             </a>
                                         </span>
                                     </div>
-                                    <p class="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
+                                    <p class="leading-relaxed">{describe}</p>
                                     <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                                         <div class="flex">
                                             <span class="mr-3">Color</span>
@@ -89,7 +87,7 @@ const ProductView = () => {
                                             <span class="mr-3">Size</span>
                                             <div class="relative">
                                                 <select class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
-                                                    <option>SM</option>
+                                                    <option>{size}</option>
                                                     <option>M</option>
                                                     <option>L</option>
                                                     <option>XL</option>
@@ -103,8 +101,10 @@ const ProductView = () => {
                                         </div>
                                     </div>
                                     <div class="flex">
-                                        <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>
-                                        <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button</button>
+                                        <span class="title-font font-medium text-2xl text-gray-900">$ {price}</span>
+                                        <button
+                                            onClick={() => dispatch(addToCart(data))}
+                                            class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">AddToCart</button>
                                         <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                                             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                                                 <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
@@ -121,4 +121,4 @@ const ProductView = () => {
     );
 };
 
-export default ProductView;
+export default SingleProductView;

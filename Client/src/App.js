@@ -10,7 +10,6 @@ import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
 import FeatureProduct from "./Pages/FeatureProduct/FeatureProduct";
 import Home from "./Pages/Home/Home";
-import ProductView from "./Pages/ProductView/ProductView";
 import Shops from "./Pages/Shops/Shops";
 import Admin from "./Dashboard/Admin/Admin";
 import CheckOutCart from "./Pages/CheckOut/CheckOutCart";
@@ -25,7 +24,6 @@ function App() {
           <Route path="/shops" component={Shops} />
           <Route path="/feature" component={FeatureProduct} />
           <Route path="/blog" component={Blogs} />
-          <Route path="/productView/:Id" component={ProductView} />
           <Route path="/checkout" component={CheckOutCart} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />

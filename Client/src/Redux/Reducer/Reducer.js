@@ -25,7 +25,7 @@ const cartReducer = (state = initialState, action) => {
             let addItem = []
             state.cartItems.map(item => {
                 if (item.id === action.payload.id) {
-                    item.product_qty += 1
+                    item.qty += 1
                 }
                 return addItem.push(item)
             })
@@ -38,7 +38,7 @@ const cartReducer = (state = initialState, action) => {
             let removeItem = []
             state.cartItems.map(item => {
                 if (item.id === action.payload.id) {
-                    item.product_qty -= 1
+                    item.qty -= 1
                 }
                 return removeItem.push(item)
             })
@@ -49,7 +49,7 @@ const cartReducer = (state = initialState, action) => {
 
         case ADD_TO_WISHLIST:
             let filWishlist = state.cartItems.filter(item => item.id !== action.payload.id)
-            action.payload.product_qty = 1
+            action.payload.qty = 1
             return {
                 ...state,
                 cartItems: filWishlist,

@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import DeleteConfirmButton from '../DeleteConfirmButton/DeleteConfirmButton';
-import EditProduct from '../EditProduct/EditProduct';
+import EditCart from '../EditProduct/EditCart'
+import ProductView from '../ProductView/ProductView'
 
 const ArrivalProductCart = ({ data }) => {
     const [showModal, setShowModal] = useState(false);
     const [EditModal, setEditModal] = useState(false);
+    const [viewModal, setViewModal] = useState(false);
+
     const { name, image, _id } = data;
 
     return (
@@ -33,15 +35,19 @@ const ArrivalProductCart = ({ data }) => {
 
             <td className="px-6 py-3 whitespace-nowrap">
                 <td>
-                    {/* View Button */}
-
                     <div class="flex item-center justify-center">
-                        <div class="w-6 mr-3 transform  hover:text-purple-500 hover:scale-110 cursor-pointer">
+
+                        {/* View Button */}
+                        <button onClick={() => setViewModal(true)} class="w-6 mr-3 transform  hover:text-purple-500 hover:scale-110 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
-                        </div>
+                        </button>
+
+                        {
+                            viewModal ? <ProductView product={data} setViewModal={setViewModal} /> : null
+                        }
 
                         {/* Edit Button */}
 
@@ -53,8 +59,10 @@ const ArrivalProductCart = ({ data }) => {
                         </button>
 
                         {
-                            EditModal ? <EditProduct id={_id} setEditModal={setEditModal} /> : null
+                            EditModal ? <EditCart _id={_id} viewData={data} setEditModal={setEditModal} /> : null
                         }
+
+
 
                         {/* Delete Button */}
                         <button onClick={() => setShowModal(true)} class="w-6  transform text-red-800 hover:text-purple-500 hover:scale-110 cursor-pointer">

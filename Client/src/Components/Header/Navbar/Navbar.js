@@ -162,9 +162,12 @@ export default function Navbar() {
                                         <span className="absolute h-20 w-10 mt-2 text-2xl text-red-500">{product.length}</span>
 
                                     </button>
+
                                     {
                                         showCart ? <ShoppingCard setShowCart={setShowCart} /> : null
                                     }
+
+
                                 </>
 
                             </div>

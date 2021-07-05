@@ -52,7 +52,7 @@ export const storeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                posts: action.payload,
+                stores: action.payload,
 
             }
         }
@@ -75,10 +75,9 @@ export const storeReducer = (state = initialState, action) => {
         case UPDATE_POST:
             return {
                 ...state,
-                stores: state.posts.map((postItem) =>
-                    postItem.id === action.payload.id ? action.payload : postItem
-                ),
+                stores: [...action.payload],
             };
+
         case DELETE_POST:
             return {
                 ...state,

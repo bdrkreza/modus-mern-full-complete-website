@@ -2,10 +2,6 @@ const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
 
 const storeSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        require: true
-    },
     catagories: {
         type: String,
         require: true
@@ -14,25 +10,29 @@ const storeSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    image: {
-        type: String,
-    },
-    describe: {
-        type: String,
-        require: true
-    },
-    size: {
-        type: String,
-        require: true
-    },
     price: {
+        type: Number,
+        require: true
+    },
+    id: {
         type: Number,
         require: true
     },
     qty: {
         type: Number,
         require: true
-    }
+    },
+    size: {
+        type: String,
+        require: true
+    },
+    describe: {
+        type: String,
+        require: true
+    },
+    image: {
+        type: String,
+    },
 })
 
 

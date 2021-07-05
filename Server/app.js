@@ -45,10 +45,10 @@ app.get("/store", async (req, res) => {
 app.post("/CreateStore", middleware, async (req, res, next) => {
     try {
         const storeData = new store({
-            id: req.body.id,
             catagories: req.body.catagories,
             name: req.body.name,
             price: req.body.price,
+            id: req.body.id,
             qty: req.body.qty,
             size: req.body.size,
             describe: req.body.describe,

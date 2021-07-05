@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import FutureProductCart from './FutureProductCart';
 import SkeletonTable from '../SkeletonTable/SkeletonTable';
 
+
 function FutureProduct() {
 
     const product = useSelector(state => {
@@ -61,6 +62,7 @@ function FutureProduct() {
 
                     </div>
             }
+
         </div>
     );
 }
