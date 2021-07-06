@@ -94,16 +94,17 @@
 
 .stripe-card {
   margin: 1rem 0;
+
 }
 
 .card-number {
   margin-top: 2rem;
+
 }
 
 .card-element {
   margin: 15px auto;
   padding: 10px 12px;
-  color: #3737da;
   background-color: #60608757;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -111,4 +112,110 @@
 
 .card-element-webkit-autofill {
   background-color: #9d9a3c !important;
+}
+
+
+
+
+.preloader {
+  color: #b1a79a;
+  font-family: arial;
+  overflow: hidden;
+}
+#building {
+  display: flex;
+  width: 35em;
+  height: 100vh;
+  margin: auto;
+}
+#blocks {
+  margin: auto;
+}
+#caption {
+  padding-left: 0.5em;
+  margin: auto;
+  font-size: 2.5em;
+}
+.b {
+  background: #bebf8293;
+  border: 0.3em solid #3560b5a0;
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 0.5em;
+  margin: 1em;
+  position: relative;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+#b1 {
+  animation-name: b1;
+}
+#b2 {
+  animation-name: b2;
+  margin-left: 7.25em;
+}
+#b3 {
+  animation-name: b3;
+  margin-top: -6em;
+}
+#b4 {
+  animation-name: b4;
+  margin-left: 7.25em;
+}
+@keyframes b1 {
+  0% {
+    left: 0em;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: 6.25em;
+    bottom: 0em;
+    transform: rotate(90deg);
+  }
+  100% {
+    left: 6.25em;
+    bottom: -6.125em;
+    transform: rotate(90deg);
+  }
+}
+@keyframes b2 {
+  50% {
+    bottom: 0em;
+  }
+  100% {
+    bottom: -6.125em;
+  }
+}
+@keyframes b3 {
+  50% {
+    top: 0em;
+  }
+  100% {
+    top: -6.125em;
+  }
+}
+@keyframes b4 {
+  0% {
+    left: 0em;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: -6.25em;
+    top: 0em;
+    transform: rotate(90deg);
+  }
+  100% {
+    left: -6.25em;
+    top: -6.125em;
+    transform: rotate(90deg);
+  }
+}
+@media(max-width: 400px) {
+  #building {
+    width: 100%
+  }
+  #caption {
+    display: none;
+  }
 }

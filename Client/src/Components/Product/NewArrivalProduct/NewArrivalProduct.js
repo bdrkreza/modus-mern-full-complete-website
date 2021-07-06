@@ -1,7 +1,6 @@
 import React from 'react';
-import { faSearch, faHeart, faStar, faEye, faEyeDropper, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../../Redux/Action/Action';
 import { useState } from 'react';

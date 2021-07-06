@@ -2,7 +2,7 @@ import React from 'react';
 
 const PaymentSuccess = () => {
     return (
-        <>
+        <div className="fixed z-10 right-0 top-12 mr-5 mb-20 transition duration-700 ease-in-out">
             <div
                 class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 mt-5"
             >
@@ -29,7 +29,7 @@ const PaymentSuccess = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

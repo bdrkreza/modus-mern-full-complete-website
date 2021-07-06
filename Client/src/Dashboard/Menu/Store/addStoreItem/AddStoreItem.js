@@ -10,18 +10,11 @@ import { createPost } from '../../../../Redux/storeReducer/StoreAction';
 const AddStoreItem = () => {
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch()
-    const [picture, setPicture] = useState(null);
     const [imaLoading, setImaLoading] = useState(null)
-    // const [imgData, setImgData] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
-    // const [loading, setLoading] = useState(false);
-    // const [isError, setIsError] = useState(false);
-    // const [isSuccess, setIsSuccess] = useState(false);
+
 
     const onSubmit = (data) => {
-        // setLoading(true);
-        // setIsError(false);
-        console.log(data);
         const formData = new FormData()
         formData.append('catagories', data.catagories);
         formData.append('name', data.name);
@@ -32,31 +25,8 @@ const AddStoreItem = () => {
         formData.append('describe', data.describe);
         formData.append('image', imageUrl);
         dispatch(createPost(formData));
-
-        // axios.post('http://localhost:5000/CreateStore', formData)
-        //     .then(res => {
-        //         setIsSuccess(res);
-        //         setLoading(false);
-        //     }).catch(err => {
-        //         setLoading(false);
-        //         setIsError(true);
-        //     });
         reset();
     }
-
-
-    // const onChangePicture = e => {
-    //     if (e.target.files[0]) {
-    //         console.log("picture: ", e.target.files);
-    //         setPicture(e.target.files[0]);
-    //         const reader = new FileReader();
-    //         reader.addEventListener("load", () => {
-    //             setImgData(reader.result);
-    //         });
-    //         reader.readAsDataURL(e.target.files[0]);
-    //     }
-    // };
-
 
     const handleImageUpload = (event) => {
         setImaLoading(true)
@@ -97,8 +67,9 @@ const AddStoreItem = () => {
                                 }
                             </div>
 
-                            <div class="mt-5 ">
-                                <label class="w-64 flex flex-col items-center px-1 py-1 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-red-800">
+                            <div class="mt-5 flex justify-center ">
+                                <label class="w-64 flex flex-col items-center 
+                                px-1 py-1 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-red-800">
                                     <svg class="w-10 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                     </svg>
@@ -128,8 +99,9 @@ const AddStoreItem = () => {
                                                 <option value="arrivalItem">Arrival Product</option>
                                                 <option value="futureItem">Future Product</option>
                                             </select>
-                                            {errors.catagories && <span className="text-red-500">This field is required</span>}
+
                                         </div>
+                                        {errors.catagories && <span className="text-red-500">This field is required</span>}
                                     </div>
 
                                     <div class="grid grid-cols-1 space-y-2">

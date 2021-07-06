@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-
 const CheckOutCart = () => {
     const product = useSelector(state => {
         return state.users.cartItems
@@ -20,7 +19,7 @@ const CheckOutCart = () => {
             <Navbar />
             <div class="h-screen h-80 bg-gray-00">
                 <div class="py-12">
-                    <div class="max-w-md mx-auto bg-gray-200 shadow-lg rounded-lg md:max-w-7xl">
+                    <div class="max-w-md mx-auto bg-gradient-to-r from-sky-100 via-sky-400 to-gray-900 shadow-lg rounded-lg md:max-w-7xl">
                         <div class="md:flex ">
                             <div class="w-full  px-3 py-2">
                                 <div class="md:grid md:grid-cols-2 gap-2 ">

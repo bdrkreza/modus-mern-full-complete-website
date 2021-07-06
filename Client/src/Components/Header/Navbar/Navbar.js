@@ -6,6 +6,7 @@ import brandLogo from '../../../assets/icons/logo-white.png'
 import { Link } from 'react-router-dom'
 import ShoppingCard from '../../ShoppingCard/ShoppingCard/ShoppingCard'
 import { useSelector } from 'react-redux'
+import { useAuth } from '../../../Users/lib/Auth'
 
 
 
@@ -16,6 +17,7 @@ const navigation = [
     { name: 'Blog', href: '/blog', current: false },
     { name: 'Contact', href: '/contact', current: false },
     { name: 'About', href: '/about', current: false },
+    { name: 'login', href: '/signIn', current: false },
 ]
 
 function classNames(...classes) {
@@ -23,6 +25,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+    const { signOut, user } = useAuth();
+    console.log(user);
     const [showCart, setShowCart] = useState(false);
     const product = useSelector(state => state.users.cartItems)
     return (
@@ -83,11 +87,14 @@ export default function Navbar() {
                                             <div>
                                                 <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                                     <span className="sr-only">Open user menu</span>
-                                                    <img
-                                                        className="h-8 w-8 rounded-full"
-                                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                        alt=""
-                                                    />
+                                                    {
+                                                        user ? <img className="h-8 w-8 rounded-full" src={user?.photoUrl} alt="" /> :
+                                                            <img
+                                                                className="h-8 w-8 rounded-full"
+                                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                                alt=""
+                                                            />
+                                                    }
                                                 </Menu.Button>
                                             </div>
                                             <Transition
@@ -132,7 +139,7 @@ export default function Navbar() {
                                                     </Menu.Item>
                                                     <Menu.Item>
                                                         {({ active }) => (
-                                                            <Link
+                                                            <Link onClick={signOut}
                                                                 to="#"
                                                                 className={classNames(
                                                                     active ? 'bg-gray-100' : '',

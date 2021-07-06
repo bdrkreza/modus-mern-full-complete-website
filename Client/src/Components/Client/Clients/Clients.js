@@ -1,5 +1,4 @@
 import React from 'react';
-import './clients.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 
