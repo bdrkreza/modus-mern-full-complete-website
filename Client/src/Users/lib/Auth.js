@@ -6,6 +6,7 @@ import Preloader from '../Preloader/Preloader'
 import SignIn from "../SignIn/SignIn";
 const authContext = createContext();
 
+
 export function AuthProvider({ children }) {
     const auth = useProvideAuth();
     return <authContext.Provider value={auth}>
@@ -39,7 +40,11 @@ export const PrivateRoute = ({
     );
 };
 
+
+
 function useProvideAuth() {
+
+
     const [user, setUser] = useState();
     const [loginStatus, setLoginStatus] = useState({
         status: "idle",

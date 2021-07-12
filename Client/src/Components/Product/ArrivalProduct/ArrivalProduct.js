@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStorePost } from '../../../Redux/storeReducer/StoreAction';
-
 import LoadingSpinner from '../../ButtonSection/LoadingSpinner/LoadingSpinner';
-import NewArrivalProduct from '../NewArrivalProduct/NewArrivalProduct';
-
-const Product = () => {
+import ArrivalProductCart from '../ArrivalProductCart/ArrivalProductCart';
+const ArrivalProduct = () => {
 
     const dispatch = useDispatch()
-    useEffect(() => dispatch(getStorePost()), [])
+    useEffect(() => dispatch(getStorePost()), [dispatch])
 
     const product = useSelector(state => {
         return state.stores.stores;
     });
-
+    const arrivalItem = product?.filter((Item) => {
+        return Item.catagories === "arrivalItem";
+    });
     const loading = useSelector(state => {
         return state.stores.loading;
     });
@@ -31,15 +31,13 @@ const Product = () => {
                         <h3 className="text-red-500 text-2xl text-center">{error}</h3> :
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:gird-cols-1 gap-6">
                             {
-                                product?.map((product) => <NewArrivalProduct product={product} />)
+                                arrivalItem?.map((product) => <ArrivalProductCart product={product} />)
                             }
                         </div>
                 }
-
-
             </div>
         </div>
     );
 };
 
-export default Product;
+export default ArrivalProduct;

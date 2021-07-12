@@ -1,9 +1,10 @@
 import React from 'react';
+import ProgressBar from './ProgressBar';
 
 const Settings = () => {
     return (
         <div>
-            <h3>this is Settings</h3>
+            <ProgressBar />
         </div>
     );
 };

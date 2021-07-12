@@ -8,10 +8,9 @@ import SingleProductView from '../SingleProductView/SingleProductView';
 
 
 
-const NewArrivalProduct = ({ product }) => {
+const ArrivalProductCart = ({ product }) => {
     const { price, name, image, _id } = product;
-    const [singleProductView, setProductView] = useState(false)
-    console.log(product);
+    const [singleProductView, setProductView] = useState(false);
     const dispatch = useDispatch();
     return (
         <>
@@ -69,4 +68,4 @@ const NewArrivalProduct = ({ product }) => {
     );
 };
 
-export default NewArrivalProduct;
+export default ArrivalProductCart;

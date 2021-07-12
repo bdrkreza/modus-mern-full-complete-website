@@ -19,7 +19,7 @@ const CheckOutCart = () => {
             <Navbar />
             <div class="h-screen h-80 bg-gray-00">
                 <div class="py-12">
-                    <div class="max-w-md mx-auto bg-gradient-to-r from-sky-100 via-sky-400 to-gray-900 shadow-lg rounded-lg md:max-w-7xl">
+                    <div class="max-w-md mx-auto bg-gradient-to-r from-gray-700 via-blue-300 to-gray-700  shadow-lg rounded-lg md:max-w-7xl">
                         <div class="md:flex ">
                             <div class="w-full  px-3 py-2">
                                 <div class="md:grid md:grid-cols-2 gap-2 ">

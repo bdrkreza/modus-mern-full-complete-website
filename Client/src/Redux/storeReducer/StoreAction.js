@@ -1,22 +1,16 @@
 import {
-    GET_POST,
     CREATE_POST,
     UPDATE_POST,
     DELETE_POST,
     GET_REQUEST,
     GET_REQUEST_SUCCESS,
     GET_REQUEST_FAILED,
+    CREATE_ADMIN_POST,
+    CREATE_POST_SUCCESS,
+    CREATE_ADMIN_SUCCESS,
+    CREATE_ADMIN_FAILED,
 } from "./types";
 import axios from "axios";
-
-// get all posts
-// export const getPosts = () => async (dispatch) => {
-//     const result = await axios.get("https://jsonplaceholder.typicode.com/posts");
-//     dispatch({
-//         type: GET_POSTS,
-//         payload: result.data,
-//     });
-// };
 
 export const getStorePost = () => {
     return async (dispatch) => {
@@ -38,27 +32,28 @@ export const getStorePost = () => {
     }
 }
 
+
+export const adminPost = (post) => {
+    return async (dispatch) => {
+        try {
+            dispatch({
+                type: CREATE_ADMIN_POST
+            })
+            const result = await axios.post(`http://localhost:5000/admin`, post)
+            dispatch({
+                type: CREATE_ADMIN_SUCCESS,
+                payload: result.data
+            })
+        } catch (error) {
+            dispatch({
+                type: CREATE_ADMIN_FAILED,
+                payload: error.message
+            })
+        }
+    }
+}
+
 // get a post
-export const getViewPost = (id) => async (dispatch) => {
-    const result = await axios.get(
-        `https://jsonplaceholder.typicode.com/posts/${id}`
-    );
-
-    dispatch({
-        type: GET_POST,
-        payload: result.data,
-    });
-};
-
-// create a post
-// export const createPost = (post) => async (dispatch) => {
-//     const result = await axios.post("http://localhost:5000/store",post );
-
-//     dispatch({
-//         type: CREATE_POST,
-//         payload: result.data,
-//     });
-// };
 
 export const createPost = (post) => {
     return async (dispatch) => {
@@ -90,14 +85,7 @@ export const UpdatePost = (post) => async (dispatch) => {
     });
 };
 
-// delete a post
-// export const deletePost = (id) => async (dispatch) => {
-//     await axios.delete(`http://localhost:5000/delete/${id}`);
-//     dispatch({
-//         type: DELETE_POST,
-//         payload: id,
-//     });
-// };
+
 
 export const deletePost = id => dispatch => {
     fetch(`http://localhost:5000/delete/${id}`, {

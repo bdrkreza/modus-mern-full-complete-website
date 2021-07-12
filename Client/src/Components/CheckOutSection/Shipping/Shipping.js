@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { userOrdersPost } from '../../../Redux/userReducer/action';
 import { useAuth } from '../../../Users/lib/Auth';
 import PaymentProcess from '../PaymentProcess/PaymentProcess';
 
 const Shipping = () => {
     const { user } = useAuth();
     const [shipping, setShippingData] = useState(null);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const dispatch = useDispatch()
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
         setShippingData(data)
@@ -17,25 +20,32 @@ const Shipping = () => {
 
         const orderDetails = {
             shipment: shipping,
-            oderItem: product,
-            orderTime: new Date(),
+            price: totalPrice,
+            image: user.photoUrl,
+            cartItems: product,
             paymentId
         };
-
-        console.log(orderDetails);
-
+        dispatch(userOrdersPost(orderDetails));
     }
-
 
 
     const product = useSelector((state) => {
         return state.users.cartItems
     })
+
+    let total = product.reduce(function (acc, curr) {
+        return acc + curr.qty * curr.price;
+    }, 0);
+
+    const tax = (total / 10).toFixed(2);
+    const totalPrice = (total + Number(tax));
+
+
     return (
         <>
-            <div class="px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20 bg-gradient-to-r from-sky-700 via-blue-300 to-sky-900">
+            <div class="px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20 bg-gradient-to-r from-gray-700 via-blue-300 to-gray-700 ">
                 <div class="leading-loose" style={{ display: shipping ? 'none' : 'block' }} >
-                    <form onSubmit={handleSubmit(onSubmit)} class="max-w-xl m-4 p-10 bg-gradient-to-r from-sky-700 via-blue-900 to-sky-900 rounded shadow-xl text-black">
+                    <form onSubmit={handleSubmit(onSubmit)} class="max-w-xl m-4 p-10 bg-gradient-to-r from-gray-700 via-blue-300 to-gray-700 rounded shadow-xl text-black">
                         <p class="font-medium">Customer information</p>
                         <div>
                             <label class="block text-md">Name</label>

@@ -6,14 +6,48 @@ import Navbar from '../../Components/Header/Navbar/Navbar';
 import { useForm } from "react-hook-form";
 import GoogleSignInButton from '../Button/GoogleSignInButton/GoogleSignInButton';
 import FacebookSignInButton from '../Button/FacebookSignInButton/FacebookSignInButton';
+import { useDispatch } from 'react-redux';
+import { userCreatePost } from '../../Redux/userAuth/action';
+import { useSelector } from 'react-redux';
+import ReviewErrors from '../UserProfile/Menu/Review/ReviewErrors';
+
 const SignUp = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const dispatch = useDispatch()
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        let userData = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            confirmPassword: data.confirmPassword
+        }
+        dispatch(userCreatePost(userData))
+        console.log(userData);
+        reset();
+    };
+
+    const success = useSelector((state) => {
+        return state.user.success
+    });
+
+    const loading = useSelector((state) => {
+        return state.user.loading
+    });
+    const error = useSelector((state) => {
+        return state.user.errors
+    })
 
     return (
         <>
             <Navbar />
+            {
+                success ? <h1>success</h1> : null
+            }
+
+            {
+                error ? <ReviewErrors error={error} /> : null
+            }
             <div className="container bg-no-repeat mt-6" style={{ backgroundImage: `url(${img})` }}>
                 <div>
 
@@ -58,6 +92,17 @@ const SignUp = () => {
                                     <input {...register("password", { required: true })} type="password" placeholder="Enter your password"
                                         class="border-2 border-pink-600 -mt-8 -ml-8 mb-5 w-64 h-16 text-center text-sm text-gray-800 " />
 
+                                    {/* Confirm Password Input field */}
+                                    <label class="border-2 border-gray-700 w-64 h-16 text-center text-md text-gray-600 pt-1">
+                                        Password
+                                        {errors.confirmPassword &&
+                                            <text className="text-red-500 ml-1">
+                                                This is required.
+                                            </text>}
+                                    </label>
+                                    <input {...register("confirmPassword", { required: true })} type="password" placeholder="Enter your password"
+                                        class="border-2 border-pink-600 -mt-8 -ml-8 mb-5 w-64 h-16 text-center text-sm text-gray-800 " />
+
                                     {/* Team Condition field */}
                                     <div class="px-0 mb-4 flex">
                                         <div class="w-1/1">
@@ -75,7 +120,7 @@ const SignUp = () => {
 
                                     {/* SignUp Button */}
                                     <div class="px-4  mb-0">
-                                        <button class="text-gray-900 bg-transparent border border-solid border-purple-500 hover:bg-purple-100 hover:text-black active:bg-purple-600 font-bold uppercase text-sm px-6 py-3  rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-48">
+                                        <button class="text-gray-900 bg-transparent border border-solid border-purple-500 hover:bg-purple-100 hover:text-black active:bg-purple-600 font-bold uppercase text-sm px-6 py-3  rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 w-48" type="submit">
                                             Sign Up
                                         </button>
                                     </div>

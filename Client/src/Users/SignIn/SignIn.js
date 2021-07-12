@@ -1,13 +1,29 @@
 import React from 'react';
 import Navbar from '../../Components/Header/Navbar/Navbar';
 import img from '../../assets/images/slider/banner-bg.jpg'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import GoogleSignInButton from '../Button/GoogleSignInButton/GoogleSignInButton';
 import FacebookSignInButton from '../Button/FacebookSignInButton/FacebookSignInButton';
+import { login } from '../../Redux/userAuth/action';
+import { useDispatch, useSelector } from 'react-redux';
+
+
 const SignIn = () => {
+
+
+
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        const loginData = {
+            email: data.email,
+            password: data.password
+        }
+        dispatch(login(loginData))
+    };
+
+
     return (
         <div>
             <Navbar />
@@ -78,4 +94,10 @@ const SignIn = () => {
     );
 };
 
+
+
+
 export default SignIn;
+
+
+

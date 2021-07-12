@@ -4,18 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../../../../App.css'
 import { getStorePost } from '../../../../Redux/storeReducer/StoreAction';
 import SkeletonTable from '../SkeletonTable/SkeletonTable';
-
 import ArrivalProductCart from './ArrivalProductCart';
 
 function ArrivalProduct() {
-
     const dispatch = useDispatch()
-    useEffect(() => dispatch(getStorePost()), [])
+    useEffect(() => dispatch(getStorePost()), []);
 
     const product = useSelector(state => {
         return state.stores.stores;
     });
 
+    const arrivalItem = product.filter((Item) => {
+        return Item.catagories === "arrivalItem";
+    });
     const loading = useSelector(state => {
         return state.stores.loading;
     });
@@ -58,7 +59,7 @@ function ArrivalProduct() {
                                 <tbody className="text-sm divide-y divide-gray-100" >
 
                                     {
-                                        product?.map((data) =>
+                                        arrivalItem?.map((data) =>
                                             <tr ><ArrivalProductCart data={data} /></tr>)
                                     }
                                 </tbody>

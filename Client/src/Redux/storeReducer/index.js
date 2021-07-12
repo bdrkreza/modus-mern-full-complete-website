@@ -14,3 +14,4 @@ export const getPostsFailed = (post) => ({
     type: CREATE_POST_FAILED,
     payload: post,
 });
+

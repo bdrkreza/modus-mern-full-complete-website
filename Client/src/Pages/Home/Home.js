@@ -5,9 +5,10 @@ import Clients from '../../Components/Client/Clients/Clients';
 import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header/Header';
 import Navbar from '../../Components/Header/Navbar/Navbar';
-import FeatureProducts from '../../Components/Product/FeatureProduct/FeatureProduct';
-import Product from '../../Components/Product/Product/Product';
+import ArrivalProduct from '../../Components/Product/ArrivalProduct/ArrivalProduct';
+import FutureProductSection from '../../Components/Product/FutureProductSection/FutureProductSection';
 import Testimonial from '../../Components/Testimonial/Testimonial/Testimonial';
+
 
 
 const Home = () => {
@@ -15,9 +16,9 @@ const Home = () => {
         <div>
             <Navbar />
             <Header />
-            <Product />
+            <ArrivalProduct />
             <Banner />
-            <FeatureProducts />
+            <FutureProductSection />
             <BlogSection />
             <Clients />
             <Testimonial />

@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const fileUpload = require('express-fileupload');
+var cookieParser = require('cookie-parser')
+
+app.use(cookieParser())
 
 const cors = require('cors');
 require('dotenv').config();
@@ -15,20 +18,18 @@ const port = process.env.PORT || 5000
 require('./connect');
 app.use(express.json());
 
-const store = require('./model/storeSchema');
-
-
 app.use(require('./router/auth'));
+
+const store = require('./model/storeSchema');
+const Cart = require('./model/ordersSchema');
+const feedback = require('./model/feedback');
+
+const Authenticate = require('./middleware/authenticate');
 
 app.get('/', (req, res) => {
     res.send('Server ok 200!')
 });
 
-//middleware
-const middleware = (req, res, next) => {
-    console.log('hello middleware');
-    next();
-};
 
 // we will handle get store 
 app.get("/store", async (req, res) => {
@@ -41,8 +42,10 @@ app.get("/store", async (req, res) => {
 });
 
 
+
+
 // we will handle Post store
-app.post("/CreateStore", middleware, async (req, res, next) => {
+app.post("/CreateStore", async (req, res, next) => {
     try {
         const storeData = new store({
             catagories: req.body.catagories,
@@ -62,6 +65,42 @@ app.post("/CreateStore", middleware, async (req, res, next) => {
     }
     next();
 });
+
+// User Orders find api
+
+app.get("/orders", async (req, res) => {
+    try {
+        const getStore = await Cart.find({})
+        res.send(getStore);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//user orders create api
+app.post("/orders", async (req, res) => {
+    console.log(req.body);
+    const cart = new Cart({
+        paymentId: req.body.paymentId,
+        userName: req.body.shipment.name,
+        userImage: req.body.image,
+        userAddress: req.body.shipment.address,
+        userEmail: req.body.shipment.email,
+        totalPrice: req.body.price,
+        products: req.body.cartItems,
+
+    });
+    cart.save((error, cart) => {
+        if (error) {
+            return res.status(400).json({ error });
+        }
+        if (cart) {
+            return res.status(201).json({ cart });
+        }
+    })
+
+})
+
 
 
 // we will handle  store findById 
@@ -98,7 +137,32 @@ app.delete("/delete/:id", async (req, res) => {
     }
 });
 
+app.get("/feedback", async (req, res) => {
+    try {
+        const getFeedback = await feedback.find({})
+        res.send(getFeedback);
+    } catch (err) {
+        console.log(err);
+    }
+});
 
+app.post("/feedback", async (req, res) => {
+    try {
+        const feedbackData = new feedback({
+            rating: req.body.rating,
+            name: req.body.name,
+            email: req.body.email,
+            massage: req.body.massage,
+            image: req.body.image,
+        })
+        await feedbackData.save();
+        res.status(201).json({ msg: 'data store successfully' });
+        console.log(res);
+    } catch (err) {
+        console.log(err);
+    }
+
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

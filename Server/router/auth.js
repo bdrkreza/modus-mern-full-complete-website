@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
 const bcrypt = require('bcryptjs');
-
+const Authenticate = require('../middleware/authenticate');
 
 require('../connect');
-const User = require('../model/userSchema')
+const User = require('../model/userSchema');
+const Admin = require('../model/Admin');
 
 
 router.get("/", (req, res, next) => {
@@ -14,9 +14,9 @@ router.get("/", (req, res, next) => {
 
 
 router.post('/register', async (req, res) => {
-    const { name, email, phone, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
-    if (!name || !email || !phone || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
         return res.status(422).json({ error: 'pls filled the field properly' });
     }
 
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
             return res.status(422).json({ error: 'password are not matching' });
 
         } else {
-            const user = new User({ name, email, phone, password, confirmPassword });
+            const user = new User({ name, email, password, confirmPassword });
             await user.save();
             res.status(201).json({ msg: 'user registered successfully' });
         }
@@ -45,6 +45,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/signIn', async (req, res) => {
 
+    let token;
     try {
         const { email, password } = req.body;
         if (!email || !password) {
@@ -55,6 +56,13 @@ router.post('/signIn', async (req, res) => {
 
         if (userLogin) {
             const isMatch = await bcrypt.compare(password, userLogin.password);
+
+            token = await userLogin.generateAuthToken();
+            res.cookie('token', token, {
+                expires: new Date(Date.now() + 2589200000),
+                httpOnly: true
+            });
+
             if (!isMatch) {
                 res.status(400).json({ error: 'invalid Credential password' });
             } else {
@@ -73,5 +81,46 @@ router.post('/signIn', async (req, res) => {
 })
 
 
+router.post('/isAdmin', async (req, res) => {
+    const email = req.body.email;
+    console.log(email);
+    try {
+        const userLogin = await Admin.findOne({ email: email });
+
+        if (userLogin) {
+
+            if (!userLogin) {
+                res.status(400).json({ error: 'invalid Credential email' });
+            } else {
+                res.json({ message: 'user SignIn Successfully' });
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+router.post("/admin", async (req, res) => {
+    const { name, email, role } = req.body;
+    if (!name || !email || !role) {
+        return res.status(422).json({ error: 'pls filled the field properly' });
+    }
+    try {
+        const adminExist = await Admin.findOne({ email: email });
+
+        if (adminExist) {
+            return res.status(422).json({ error: 'email already Exist' });
+
+        } else {
+            const admin = new Admin({ name, email, role });
+            await admin.save();
+            res.status(201).json({ msg: 'admin registered successfully' });
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;

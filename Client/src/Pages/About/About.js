@@ -1,10 +1,19 @@
 import React from 'react';
+import HeroSection from '../../Components/AboutSection/HeroSection';
+import OurTeam from '../../Components/AboutSection/OurTeam';
+import ProductCart from '../../Components/AboutSection/ProductCart';
+import ProductCartSection from '../../Components/AboutSection/ProductCartSection';
 import Navbar from '../../Components/Header/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer'
 const About = () => {
     return (
         <>
             <Navbar />
-            <h1>this is about</h1>
+            <HeroSection />
+            <OurTeam />
+            <ProductCart />
+            <ProductCartSection />
+            <Footer />
         </>
     );
 };

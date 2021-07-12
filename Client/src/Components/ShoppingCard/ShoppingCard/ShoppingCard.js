@@ -2,15 +2,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import TotalAmountInfo from '../../CheckOutSection/TotalAmoutInfo/TotalAmoutInfo';
 import CartItem from '../CartItem/CartItem';
 const ShoppingCard = ({ setShowCart }) => {
+
     const product = useSelector(state => {
         return state.users.cartItems
     })
 
     return (
         <div className="relative z-50  ">
-            <div class="fixed right-0 top-0 max-w-sm w-full h-full px-6 py-4 transition duration-300 transform overflow-y-visible bg-gray-200 border-l-2 border-gray-300 ">
+            <div class="fixed right-0 top-0 max-w-sm w-full h-full px-6 py-4 transition duration-900 transform overflow-y-visible bg-gradient-to-r from-gray-400 via-blue-300 to-gray-300 border-l-2 border-yellow-100 ">
 
                 <div onClick={() => setShowCart(false)} className="h-10 w-10 bg-gray-600 absolute right-80 mr-16 flex items-center shadow rounded-l justify-center cursor-pointer">
                     <svg class="h-5 w-5 text-red-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -39,38 +41,13 @@ const ShoppingCard = ({ setShowCart }) => {
                 <div className="fixed
              bottom-0 px-2">
                     <div class="mb-5">
-                        <div className="flex justify-between">
-                            <p className="text-muted">Temporary Amount</p>
-                            <p className="text-muted">${product.reduce((acc, { price, qty }) => {
-                                let product_qty = parseInt(qty)
-                                let item = parseFloat(price).toFixed(2)
-                                let accumulator = parseFloat(acc).toFixed(2)
-                                let res = parseFloat(item) * product_qty + parseFloat(accumulator)
-                                return parseFloat(res).toFixed(2)
-                            }, 0)}</p>
-                        </div>
-                        <div className="flex mb-3 justify-between">
-                            <p className="text-muted">Shipping</p>
-                            <p className="text-muted">Free</p>
-                        </div>
-                        <div className='flex justify-between'>
-                            <strong>Total price + (VAT)</strong>
-                            <strong>
-                                ${product.length > 0 ? parseFloat(product.reduce((acc, { price, qty }) => {
-                                    let product_qty = parseInt(qty)
-                                    let item = parseFloat(price).toFixed(2)
-                                    let accumulator = parseFloat(acc).toFixed(2)
-                                    let res = parseFloat(item) * product_qty + parseFloat(accumulator)
-                                    return parseFloat(res).toFixed(2)
-                                }, 0)) + 2 : 0}
-                            </strong>
-                        </div>
+                        <TotalAmountInfo />
                     </div>
 
                     <div class="bg-white rounded shadow border mb-3 position  p-3 px-4 w-80">
-                        <Link to="/checkout" class="flex items-center justify-center mt-4 px-3 py-2 bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                            <span>Chechout</span>
-                            <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <Link to="/checkout" class="flex items-center justify-center mt-4 px-3 py-2 bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900 text-white text-sm  font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                            <span>CheckOut</span>
+                            <svg class="animate-pulse h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                             </svg>
                         </Link>

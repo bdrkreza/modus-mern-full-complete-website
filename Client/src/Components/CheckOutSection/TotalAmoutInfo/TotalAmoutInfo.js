@@ -1,18 +1,25 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const TotalAmountInfo = ({ product }) => {
+const TotalAmountInfo = () => {
+    const product = useSelector((state) => {
+        return state.users.cartItems
+    })
+
+    let total = 0;
+    for (let i = 0; i < product.length; i++) {
+        const cart = product[i];
+        total = total + cart.price * cart.qty;
+    }
+    const tax = (total / 10).toFixed(2);
+    const totalPrice = (total + Number(tax));
+
     return (
         <>
             <div class="mb-3 mt-4">
                 <div className="flex justify-between ">
                     <p className="text-muted mb-2">Temporary Amount</p>
-                    <p className="text-muted">${product.reduce((acc, { price, qty }) => {
-                        let product_qty = parseInt(qty)
-                        let item = parseFloat(price).toFixed(2)
-                        let accumulator = parseFloat(acc).toFixed(2)
-                        let res = parseFloat(item) * product_qty + parseFloat(accumulator)
-                        return parseFloat(res).toFixed(2)
-                    }, 0)}</p>
+                    <p className="text-muted">{total}</p>
                 </div>
                 <div className="flex mb-3 justify-between">
                     <p className="text-muted">Shipping</p>
@@ -20,15 +27,9 @@ const TotalAmountInfo = ({ product }) => {
                 </div>
                 <hr class="border-0 bg-gray-400 text-gray-500 h-px" />
                 <div className='flex justify-between'>
-                    <strong>Total Amount Of (including VAT)</strong>
+                    <strong>Total Amount Of (In +10%/VAT)</strong>
                     <strong>
-                        ${product.length > 0 ? parseFloat(product.reduce((acc, { price, qty }) => {
-                            let product_qty = parseInt(qty)
-                            let item = parseFloat(price).toFixed(2)
-                            let accumulator = parseFloat(acc).toFixed(2)
-                            let res = parseFloat(item) * product_qty + parseFloat(accumulator)
-                            return parseFloat(res).toFixed(2)
-                        }, 0)) + 2 : 0}
+                        ${totalPrice}
                     </strong>
                 </div>
             </div>

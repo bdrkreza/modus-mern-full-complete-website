@@ -15,6 +15,10 @@ import Admin from "./Dashboard/Admin/Admin";
 import CheckOutCart from "./Pages/CheckOut/CheckOutCart";
 import SignIn from './Users/SignIn/SignIn'
 import { AuthProvider, PrivateRoute } from "./Users/lib/Auth";
+import Dashboard from "./Users/UserProfile/Dashboard/Dashboard";
+import ProtectedRoute from "./Users/lib/ProtectedRoute";
+import Settings from "./Users/UserProfile/Menu/Settings/Settings";
+
 function App() {
   return (
     <>
@@ -26,12 +30,15 @@ function App() {
             <Route path="/shops" component={Shops} />
             <Route path="/feature" component={FeatureProduct} />
             <Route path="/blog" component={Blogs} />
+            <PrivateRoute path="/userDashboard" component={Dashboard} />
             <PrivateRoute path="/checkout" component={CheckOutCart} />
+            <PrivateRoute path="/userSetting" component={Settings} />
+
             <Route path="/about" component={About} />
             <Route path="/signIn" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/contact" component={Contact} />
-            <Route path="/dashboard" component={Admin} />
+            <PrivateRoute path="/dashboard" component={Admin} />
           </Switch>
         </Router>
       </AuthProvider>

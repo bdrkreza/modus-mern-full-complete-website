@@ -10,6 +10,11 @@ function FutureProduct() {
         return state.stores.stores;
     });
 
+    const futureItem = product.filter((Item) => {
+        return Item.catagories === "futureItem";
+    });
+
+
     const loading = useSelector(state => {
         return state.stores.loading;
     });
@@ -52,7 +57,7 @@ function FutureProduct() {
                                 <tbody className="text-sm divide-y divide-gray-100 overflow-auto">
 
                                     {
-                                        product.map((data => <tr><FutureProductCart data={data} /></tr>))
+                                        futureItem.map((data => <tr><FutureProductCart data={data} /></tr>))
                                     }
                                 </tbody>
 

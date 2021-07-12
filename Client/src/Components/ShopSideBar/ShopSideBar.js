@@ -1,5 +1,5 @@
 import React from 'react';
-import Product from '../Product/Product/Product';
+import ArrivalProduct from '../Product/ArrivalProduct/ArrivalProduct';
 
 const ShopSideBar = () => {
     return (
@@ -164,7 +164,7 @@ const ShopSideBar = () => {
                         </div>
                     </div>
                 </div>
-                <Product />
+                <ArrivalProduct />
             </div>
         </>
     );

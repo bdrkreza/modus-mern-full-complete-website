@@ -6,18 +6,17 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import DashHeader from '../Header/DashHeader';
 import Orders from '../Menu/Orders/Orders';
 import Stores from '../Menu/Store/Stores/Stores';
-import Settings from '../Menu/Settings/Settings/Settings';
+import Settings from '../Menu/Settings/Settings';
 import Shipment from '../Business/Shipment/Shipment';
 import Employee from '../Business/Employee/Employee';
 import Blogs from '../Menu/Blogs/Blogs';
 import DashboardAvatar from '../Dashboard/DashboardAvater/DashboardAvater';
 import AddStoreItem from '../Menu/Store/addStoreItem/AddStoreItem';
 
-// const myStyle = {
-//     background: '#191919'
-// }
+
 
 const Admin = () => {
+
     let { path, url } = useRouteMatch();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     return (

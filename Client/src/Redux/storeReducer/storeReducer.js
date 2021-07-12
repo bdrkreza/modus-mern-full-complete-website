@@ -7,10 +7,14 @@ import {
     GET_REQUEST_FAILED,
     CREATE_POST_SUCCESS,
     CREATE_POST_FAILED,
+    CREATE_ADMIN_POST,
+    CREATE_ADMIN_SUCCESS,
+    CREATE_ADMIN_FAILED,
 } from "./types";
 
 
 const initialState = {
+    success: null,
     loading: false,
     errors: "",
     stores: [],
@@ -65,12 +69,31 @@ export const storeReducer = (state = initialState, action) => {
             }
         }
 
-        // case CREATE_POST:
-        //     console.log(action.payload);
-        //     return {
-        //         ...state,
-        //         stores: action.payload
-        //     };
+        case CREATE_ADMIN_POST: {
+            return {
+                ...state,
+                loading: true,
+            }
+        }
+        case CREATE_ADMIN_SUCCESS: {
+            return {
+                ...state,
+                loading: false,
+                stores: action.payload,
+                success: action.payload
+
+            }
+        }
+
+        case CREATE_ADMIN_FAILED: {
+            return {
+                ...state,
+                success: false,
+                loading: false,
+                errors: action.payload
+            }
+        }
+
 
         case UPDATE_POST:
             return {
@@ -83,6 +106,8 @@ export const storeReducer = (state = initialState, action) => {
                 ...state,
                 stores: [...action.payload],
             };
+
+
         default:
             return state;
     }

@@ -7,5 +7,6 @@ npm install cors
 npm install nodemon
 npm install dotenv
 npm install express-fileupload
+npm i cookie-parser
 
 
