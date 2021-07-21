@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { userReviewPost } from '../../../../Redux/userReducer/action';
 import { useAuth } from '../../../lib/Auth';
-import Rating, { StarRating } from './Rating';
+import { StarRating } from './Rating';
 import ReviewErrors from './ReviewErrors';
 import ReviewSuccess from './ReviewSuccess';
 

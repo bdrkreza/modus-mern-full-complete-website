@@ -6,7 +6,6 @@ import {
     GET_REQUEST_SUCCESS,
     GET_REQUEST_FAILED,
     CREATE_ADMIN_POST,
-    CREATE_POST_SUCCESS,
     CREATE_ADMIN_SUCCESS,
     CREATE_ADMIN_FAILED,
 } from "./types";
@@ -39,7 +38,7 @@ export const adminPost = (post) => {
             dispatch({
                 type: CREATE_ADMIN_POST
             })
-            const result = await axios.post(`http://localhost:5000/admin`, post)
+            const result = await axios.post(`http://localhost:5000/postAdmin`, post)
             dispatch({
                 type: CREATE_ADMIN_SUCCESS,
                 payload: result.data

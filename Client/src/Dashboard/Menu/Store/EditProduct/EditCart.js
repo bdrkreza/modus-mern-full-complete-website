@@ -34,7 +34,7 @@ const EditCart = ({ _id, setEditModal, viewData }) => {
         formData.append('describe', data.describe);
         formData.append('image', imageUrl);
 
-        fetch(`http://localhost:5000/Update/${_id}`, {
+        fetch(`http://localhost:5000/update/${_id}`, {
             method: 'PATCH',
             body: formData
         })
@@ -48,7 +48,6 @@ const EditCart = ({ _id, setEditModal, viewData }) => {
 
         reset();
     }
-
 
     const handleImageUpload = (event) => {
         setImaLoading(true)
@@ -64,13 +63,7 @@ const EditCart = ({ _id, setEditModal, viewData }) => {
             .catch(function (error) {
                 alert('Sorry page not found', error);
             });
-
-
     }
-
-
-
-
 
     return (
         <div>

@@ -3,7 +3,6 @@ import ViewCart from './ViewCart';
 
 const ModelViewCart = ({ setShowModal, product }) => {
     const data = product.products
-    console.log(data);
     return (
         <>
             <div

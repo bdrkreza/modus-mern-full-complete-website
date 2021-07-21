@@ -51,6 +51,6 @@ const CartSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("orders", CartSchema);
+const customOrder = mongoose.model("orders", CartSchema);
 
-
+module.exports = customOrder;
