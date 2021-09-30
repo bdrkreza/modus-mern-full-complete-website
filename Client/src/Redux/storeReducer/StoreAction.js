@@ -1,15 +1,9 @@
-import {
-    CREATE_POST,
-    UPDATE_POST,
-    DELETE_POST,
-    GET_REQUEST,
-    GET_REQUEST_SUCCESS,
-    GET_REQUEST_FAILED,
-    CREATE_ADMIN_POST,
-    CREATE_ADMIN_SUCCESS,
-    CREATE_ADMIN_FAILED,
-} from "./types";
 import axios from "axios";
+import {
+    CREATE_ADMIN_FAILED, CREATE_ADMIN_POST,
+    CREATE_ADMIN_SUCCESS, CREATE_POST, DELETE_POST,
+    GET_REQUEST, GET_REQUEST_FAILED, GET_REQUEST_SUCCESS, UPDATE_POST
+} from "./types";
 
 export const getStorePost = () => {
     return async (dispatch) => {
@@ -17,7 +11,7 @@ export const getStorePost = () => {
             dispatch({
                 type: GET_REQUEST
             })
-            const result = await axios.get(`http://localhost:5000/store`)
+            const result = await axios.get(`https://rkmodus.herokuapp.com/store`)
             dispatch({
                 type: GET_REQUEST_SUCCESS,
                 payload: result.data
@@ -38,7 +32,7 @@ export const adminPost = (post) => {
             dispatch({
                 type: CREATE_ADMIN_POST
             })
-            const result = await axios.post(`http://localhost:5000/postAdmin`, post)
+            const result = await axios.post(`https://rkmodus.herokuapp.com/postAdmin`, post)
             dispatch({
                 type: CREATE_ADMIN_SUCCESS,
                 payload: result.data
@@ -60,7 +54,7 @@ export const createPost = (post) => {
             dispatch({
                 type: CREATE_POST
             })
-            const result = await axios.post('http://localhost:5000/CreateStore', post)
+            const result = await axios.post('https://rkmodus.herokuapp.com/CreateStore', post)
             dispatch({
                 type: GET_REQUEST_SUCCESS,
                 payload: result.data
@@ -77,7 +71,7 @@ export const createPost = (post) => {
 // update a post
 export const UpdatePost = (post) => async (dispatch) => {
     const result = await axios.patch(
-        `http://localhost:5000/update/${post.id}`, post);
+        `https://rkmodus.herokuapp.com/update/${post.id}`, post);
     dispatch({
         type: UPDATE_POST,
         payload: result.data,
@@ -87,7 +81,7 @@ export const UpdatePost = (post) => async (dispatch) => {
 
 
 export const deletePost = id => dispatch => {
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`https://rkmodus.herokuapp.com/delete/${id}`, {
         method: "DELETE"
     })
         .then(res => res.json())

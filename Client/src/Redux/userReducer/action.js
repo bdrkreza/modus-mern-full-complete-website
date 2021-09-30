@@ -1,6 +1,6 @@
-import axios from "axios"
+import axios from "axios";
+import { GET_ORDERS, GET_ORDERS_FAILED, GET_ORDERS_SUCCESS, USER_ORDERS_POST, USER_ORDERS_POST_FAILED, USER_ORDERS_POST_SUCCESS, USER_REVIEW_POST, USER_REVIEW_POST_FAILED, USER_REVIEW_POST_SUCCESS } from "./types";
 
-import { GET_ORDERS, GET_ORDERS_FAILED, GET_ORDERS_SUCCESS, USER_ORDERS_POST, USER_ORDERS_POST_FAILED, USER_ORDERS_POST_SUCCESS, USER_REVIEW_POST, USER_REVIEW_POST_FAILED, USER_REVIEW_POST_SUCCESS } from "./types"
 
 // get all orders
 export const getOrders = () => async (dispatch) => {
@@ -8,7 +8,7 @@ export const getOrders = () => async (dispatch) => {
         dispatch({
             type: GET_ORDERS
         })
-        const result = await axios.get("http://localhost:5000/orders");
+        const result = await axios.get("https://rkmodus.herokuapp.com/orders");
         dispatch({
             type: GET_ORDERS_SUCCESS,
             payload: result.data,
@@ -30,7 +30,7 @@ export const userOrdersPost = (post) => {
             dispatch({
                 type: USER_ORDERS_POST
             })
-            const result = await axios.post('http://localhost:5000/orders', post)
+            const result = await axios.post('https://rkmodus.herokuapp.com/orders', post)
             dispatch({
                 type: USER_ORDERS_POST_SUCCESS,
                 payload: result.data
@@ -51,7 +51,7 @@ export const userReviewPost = (post) => {
             dispatch({
                 type: USER_REVIEW_POST
             })
-            const result = await axios.post('http://localhost:5000/feedback', post)
+            const result = await axios.post('https://rkmodus.herokuapp.com/feedback', post)
             dispatch({
                 type: USER_REVIEW_POST_SUCCESS,
                 payload: result.data

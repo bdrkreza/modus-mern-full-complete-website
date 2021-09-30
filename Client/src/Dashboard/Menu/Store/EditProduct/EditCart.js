@@ -1,12 +1,11 @@
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import img from '../../../../assets/images/populer-products/fff.png';
 
-import { useState } from 'react';
-import { useForm, } from 'react-hook-form';
-import img from '../../../../assets/images/populer-products/fff.png'
 
 
 
@@ -34,7 +33,7 @@ const EditCart = ({ _id, setEditModal, viewData }) => {
         formData.append('describe', data.describe);
         formData.append('image', imageUrl);
 
-        fetch(`http://localhost:5000/update/${_id}`, {
+        fetch(`https://rkmodus.herokuapp.com/update/${_id}`, {
             method: 'PATCH',
             body: formData
         })

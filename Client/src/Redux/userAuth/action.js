@@ -1,6 +1,5 @@
 import axios from "axios"
-import setAuthToken from "./setAuthToken"
-import { AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, USER_LOADED, USER_REGISTER_POST, USER_REGISTER_POST_FAILED, USER_REGISTER_POST_SUCCESS } from "./types"
+import { LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, USER_REGISTER_POST, USER_REGISTER_POST_FAILED, USER_REGISTER_POST_SUCCESS } from "./types"
 
 export const userCreatePost = (post) => {
     return async (dispatch) => {
@@ -8,7 +7,7 @@ export const userCreatePost = (post) => {
             dispatch({
                 type: USER_REGISTER_POST
             })
-            const result = await axios.post('http://localhost:5000/register', post)
+            const result = await axios.post('https://rkmodus.herokuapp.com/register', post)
             dispatch({
                 type: USER_REGISTER_POST_SUCCESS,
                 payload: result.data
@@ -27,7 +26,7 @@ export const login = (post) => {
     return async (dispatch) => {
         try {
 
-            const res = await axios.post('http://localhost:5000/signIn', post)
+            const res = await axios.post('https://rkmodus.herokuapp.com/signIn', post)
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data,
@@ -48,7 +47,7 @@ export const login = (post) => {
 //     }
 
 //     try {
-//         const res = await axios.get("http://localhost:5000/user");
+//         const res = await axios.get("https://rkmodus.herokuapp.com/user");
 //         dispatch({
 //             type: USER_LOADED,
 //             payload: res.data,
